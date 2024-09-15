@@ -11,39 +11,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Full history
+          fetch-depth: 0  # Fetch full history
 
-      # Set up the Go environment
+      # Step 2: Set up the Go environment
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: '1.18'
 
-      # Debug step to verify the directory and check for go.mod
-      - name: Debug - Verify go.mod Location
+      # Step 3: Debug - Show current working directory and confirm go.mod is present
+      - name: Debug - Show Current Working Directory and Files
         run: |
+          echo "Checking working directory and file structure:"
           pwd
           ls -la
-          cat go.mod || echo "go.mod not found!"  # Attempt to print go.mod contents
-        working-directory: ./  # Set this to your project's root
+          find . -name "go.mod" || echo "go.mod not found!"
+        working-directory: ./  # Set this to the root where go.mod should be
 
-      # Install dependencies using go.mod
+      # Step 4: Install dependencies using go.mod
       - name: Install dependencies
         run: go mod tidy
-        working-directory: ./  # Ensure correct working directory
+        working-directory: ./  # Adjust to root directory if go.mod is at the root
 
-      # Run tests
+      # Step 5: Run tests
       - name: Run tests
         run: go test ./... -v
-        working-directory: ./  # Ensure correct working directory
+        working-directory: ./  # Ensure it's set to where go.mod is
 
-      # Lint the code
+      # Step 6: Lint the code
       - name: Lint the code
         run: |
           go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
           golangci-lint run
-        working-directory: ./  # Ensure correct working directory
+        working-directory: ./  # Set to root directory if go.mod is at the root
