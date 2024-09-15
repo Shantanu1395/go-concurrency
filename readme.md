@@ -42,19 +42,13 @@ This project is a web scraper implemented in Go, utilizing various concurrency p
 ## Running the Application
 Navigate to the main application directory and run the following command:
 ```bash
-go run cmd/webscraper/main.go
+go run main.go
 ```
 
 ## Run all testcases
+### gin server
 ```bash
-go test ./internal/scraper/ -v -run .
-```
-
-### Running Tests
-To run all the test cases, use the following command:
-```bash
-go test ./internal/scraper/...
-go test ./tests/... # -- error
+go test ./internal/server/... -v
 ```
 
 ## Benchmarking
