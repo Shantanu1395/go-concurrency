@@ -21,23 +21,20 @@ jobs:
 
       - name: Install dependencies
         run: go mod tidy
+        working-directory: ../.. # Root of the project relative to .github/workflows/
 
       - name: Run tests
-        run: |
-          go test ./... -v
-
-      - name: Validate README Update
-        run: |
-          # Verify that README.md is properly updated
-          echo "README.md validated successfully."
+        run: go test ./... -v
+        working-directory: ../.. # Root of the project relative to .github/workflows/
 
       - name: Lint the code
         run: |
           go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
           golangci-lint run
+        working-directory: ../.. # Root of the project relative to .github/workflows/
 
       - name: Deploy to Staging
         if: success()
         run: |
           echo "Deploying to staging environment..."
-          # Add deployment steps (e.g., Docker, Kubernetes)
+        working-directory: ../.. # Root of the project relative to .github/workflows/
