@@ -1,0 +1,58 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Go workspace folder specific to the user's environment
+GOPATH/
+GOCACHE/
+GOBIN/
+
+# Configuration files for IDEs and editors
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Dependency directories (e.g., vendor and mod cache)
+vendor/
+bin/
+pkg/
+.cache/
+*.mod
+*.sum
+
+# Output directories for Go builds
+/build/
+!cmd/**/build/
+
+# Debugging and profiling files
+*.prof
+
+# Go build cache and modules downloaded by `go mod`
+/go.sum
+/go.mod
+/go.work
+/go.work.sum
+
+# Sensitive data
+.env
+*.key
+*.pem
+
+# OS-specific files
+.DS_Store
+Thumbs.db
