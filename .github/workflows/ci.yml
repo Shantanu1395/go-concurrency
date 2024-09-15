@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI Pipeline
 
 on:
   push:
@@ -21,20 +21,20 @@ jobs:
 
       - name: Install dependencies
         run: go mod tidy
-        working-directory: ../.. # Root of the project relative to .github/workflows/
+        working-directory: ./  # Set to the directory where go.mod is located
 
       - name: Run tests
         run: go test ./... -v
-        working-directory: ../.. # Root of the project relative to .github/workflows/
+        working-directory: ./  # Set to the directory where go.mod is located
 
       - name: Lint the code
         run: |
           go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
           golangci-lint run
-        working-directory: ../.. # Root of the project relative to .github/workflows/
+        working-directory: ./  # Set to the directory where go.mod is located
 
       - name: Deploy to Staging
         if: success()
         run: |
           echo "Deploying to staging environment..."
-        working-directory: ../.. # Root of the project relative to .github/workflows/
+        working-directory: ./  # Set to the directory where go.mod is located
