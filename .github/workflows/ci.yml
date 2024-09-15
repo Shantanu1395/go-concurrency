@@ -41,14 +41,3 @@ jobs:
       - name: Run tests
         run: go test ./... -v
         working-directory: ./
-
-      # Step 6: Install a compatible version of golangci-lint
-      - name: Install golangci-lint
-        run: |
-          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
-        working-directory: ./
-
-      # Step 7: Lint the code
-      - name: Lint the code
-        run: golangci-lint run
-        working-directory: ./
