@@ -54,42 +54,14 @@ go test ./internal/server/... -v
 ## Benchmarking
 To benchmark the concurrency performance, execute:
 ```bash
-go test -bench=. ./internal/scraper/
+go test -bench=. ./internal/server/...
 ```
 
 ## Checking for Memory Leaks
 The test suite includes checks for memory leaks. Run:
 ```bash
-go test -run TestMemoryLeak ./internal/scraper/
+go test -run TestMemoryLeak ./internal/server/...
 ```
-
-## Troubleshooting
-If you encounter errors such as "file not found" or other issues, follow these steps:
-
-1. **Ensure Correct Extraction**:
-    - Verify that all files and directories are correctly extracted as shown in the directory structure above.
-
-2. **Check File Paths and Permissions**:
-    - Use the `ls` command to list files in each directory and confirm their presence:
-      ```bash
-      ls -l
-      ```
-    - Adjust file permissions if needed using:
-      ```bash
-      chmod +r <filename>
-      ```
-
-3. **Verbose Output for Tests**:
-    - Run tests with verbose output to gather more information:
-      ```bash
-      go test -v ./internal/scraper/...
-      ```
-
-4. **Re-create Directories and Files if Needed**:
-    - If the extraction didn’t go well, manually create the directories and copy the files into the correct locations.
-
-5. **Check Module Names**:
-    - Ensure that the import paths in your Go files match the module name set in `go.mod`.
 
 ## Project Structure
 - **cmd/webscraper/main.go**: Main application code implementing the web scraper.
