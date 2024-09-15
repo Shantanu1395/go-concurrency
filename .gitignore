@@ -44,7 +44,6 @@ pkg/
 
 # Go build cache and modules downloaded by `go mod`
 /go.sum
-/go.mod
 /go.work
 /go.work.sum
 
