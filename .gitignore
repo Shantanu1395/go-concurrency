@@ -32,7 +32,6 @@ vendor/
 bin/
 pkg/
 .cache/
-*.mod
 *.sum
 
 # Output directories for Go builds
