@@ -1,17 +1,17 @@
-
 package main
 
 import (
 	"context"
+	"go_concurrency/internal/scraper"
+	"sync"
 	"testing"
 	"time"
-	"sync"
 )
 
 func TestFetchTask(t *testing.T) {
 	ctx := context.Background()
 	url := "https://www.google.com"
-	result, err := fetchTask(ctx, url)
+	result, err := scraper.FetchTask(ctx, url)
 	if err != nil {
 		t.Fatalf("Expected no error, got %v", err)
 	}
@@ -31,8 +31,8 @@ func TestRateLimitedFanOut(t *testing.T) {
 	}
 
 	rateLimiter := make(chan struct{}, 2) // Limiting concurrency to 2
-	results := rateLimitedFanOut(ctx, urls, 3, rateLimiter)
-	collectedResults := fanIn(results)
+	results := scraper.RateLimitedFanOut(ctx, urls, 3, rateLimiter)
+	collectedResults := scraper.FanIn(results)
 
 	if len(collectedResults) != len(urls) {
 		t.Errorf("Expected %d results, got %d", len(urls), len(collectedResults))
@@ -50,8 +50,8 @@ func BenchmarkRateLimitedFanOut(b *testing.B) {
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 		rateLimiter := make(chan struct{}, 5)
-		results := rateLimitedFanOut(ctx, urls, 5, rateLimiter)
-		fanIn(results)
+		results := scraper.RateLimitedFanOut(ctx, urls, 5, rateLimiter)
+		scraper.FanIn(results)
 	}
 }
 
