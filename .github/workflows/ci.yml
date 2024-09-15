@@ -11,34 +11,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Step 2: Set up the Go environment
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: '1.18'
 
-      # Verify the current working directory and the presence of go.mod
-      - name: Verify go.mod location
+      # Step 3: Debug step to confirm the working directory and list files
+      - name: Debug - Show Current Working Directory and Files
         run: |
           pwd
           ls -la
-        working-directory: ./  # Adjust this if go.mod is not at the root
+        working-directory: ./  # Root directory where go.mod is located
 
-      # Install dependencies
+      # Step 4: Install dependencies using go.mod
       - name: Install dependencies
         run: go mod tidy
-        working-directory: ./  # Adjust this if go.mod is not at the root
+        working-directory: ./  # Ensure the command runs in the root directory
 
-      # Run tests
+      # Step 5: Run tests
       - name: Run tests
         run: go test ./... -v
-        working-directory: ./  # Adjust this if go.mod is not at the root
+        working-directory: ./  # Ensure tests run in the correct context
 
-      # Lint the code
+      # Step 6: Lint the code using golangci-lint
       - name: Lint the code
         run: |
           go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
           golangci-lint run
-        working-directory: ./  # Adjust this if go.mod is not at the root
+        working-directory: ./  # Run linting in the correct directory
