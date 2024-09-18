@@ -1,4 +1,6 @@
 
+Add testcases, benchmarks and standards to it
+
 # Go Web Scraper with Concurrency Patterns
 
 This project is a web scraper implemented in Go, utilizing various concurrency patterns such as Worker Pools, Fan-Out/Fan-In, Rate Limiting, and Context Management.
